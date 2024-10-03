@@ -1,0 +1,4 @@
+Average Percent Overlap: 17.3
+Average Spearman Coefficient: -7.3538
+
+These figures clearly indicate that there is a low level of similarity between the search results provided by DuckDuckGo and Google. If we take Google’s results as the benchmark for user expectations, then DuckDuckGo’s results seem to diverge significantly. With an overlap of less than 20% in the top 10 search results, users are unlikely to receive the same information from DuckDuckGo as they would from Google. This substantial difference may be due to Google’s utilization of more advanced and precise algorithms, such as PageRank, which enhance the relevance and accuracy of search results. Furthermore, Google’s extensive database and the use of user data and search history enable it to offer more personalized and relevant web pages to users.
