@@ -1,16 +1,14 @@
 package com.will.report;
 
-import com.will.data.UrlDiscoveryService;
-import com.will.data.FetchStatusTracker;
-import com.will.data.VisitedPageTracker;
 import com.will.config.Config;
+import com.will.data.FetchStatusTracker;
+import com.will.data.UrlDiscoveryService;
+import com.will.data.VisitedPageTracker;
 import com.will.data.model.DiscoveredUrl;
 import com.will.data.model.FetchResult;
 import com.will.data.model.VisitedPage;
 import com.will.util.FileUtils;
 import org.apache.commons.httpclient.HttpStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,8 +17,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class SummaryReport {
-
-    private static final Logger logger = LoggerFactory.getLogger(SummaryReport.class);
     private static final int KB = 1024;
 
     private final FetchStatusTracker fetchStatusTracker;
@@ -37,7 +33,7 @@ public class SummaryReport {
         this.visitedPageTracker = visitedPageTracker;
     }
 
-    public void write() {
+    public void write() throws IOException {
         String filepath = Config.SUMMARY_FILE_PATH;
 
         try (FileWriter fileWriter = new FileWriter(filepath)) {
@@ -64,8 +60,6 @@ public class SummaryReport {
 
             writeStatisticsHeader(fileWriter, "Content Types");
             writeContentTypeStatistics(fileWriter);
-        } catch (IOException e) {
-            logger.error("Failed to write summary report", e);
         }
     }
 

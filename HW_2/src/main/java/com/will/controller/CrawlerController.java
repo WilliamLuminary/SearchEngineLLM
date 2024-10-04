@@ -55,7 +55,7 @@ public class CrawlerController {
             );
             summaryReport.write();
         } catch (Exception e) {
-            logger.error("Error occurred during crawling", e);
+            logger.error("Error occurred during crawling: {}", e.getMessage(), e);
         }
     }
 }
