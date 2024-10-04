@@ -1,36 +1,49 @@
 package com.will.crawler;
 
-import com.will.Discovered;
-import com.will.Fetching;
-import com.will.Visited;
 import com.will.config.Config;
+import com.will.data.FetchStatusTracker;
+import com.will.data.UrlDiscoveryService;
+import com.will.data.VisitedPageTracker;
+import com.will.data.model.DiscoveredUrl;
+import com.will.data.model.FetchResult;
+import com.will.data.model.VisitedPage;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import edu.uci.ics.crawler4j.url.WebURL;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.regex.Pattern;
 
 public class CustomCrawler extends WebCrawler {
 
-    private static final Logger logger = LoggerFactory.getLogger(CustomCrawler.class);
-
     private static final Pattern DOC_PATTERNS = Pattern.compile(".*(\\.(html?|php|pdf|docx?))$");
-
     private static final Pattern IMAGE_PATTERNS = Pattern.compile(".*(\\.(jpe?g|ico|png|bmp|svg|gif|webp|tiff))$");
 
+    private final FetchStatusTracker fetchStatusTracker;
+    private final UrlDiscoveryService urlDiscoveryService;
+    private final VisitedPageTracker visitedPageTracker;
+
+    public CustomCrawler(
+            FetchStatusTracker fetchStatusTracker,
+            UrlDiscoveryService urlDiscoveryService,
+            VisitedPageTracker visitedPageTracker
+    ) {
+        this.fetchStatusTracker = fetchStatusTracker;
+        this.urlDiscoveryService = urlDiscoveryService;
+        this.visitedPageTracker = visitedPageTracker;
+    }
+
     @Override
-    public boolean shouldVisit(Page page, WebURL url) {
+    public boolean shouldVisit(Page referringPage, WebURL url) {
         String urlString = url.getURL();
-        Discovered.Item item = Discovered.find(urlString);
-        if (item == null) {
+        DiscoveredUrl existingUrl = urlDiscoveryService.findUrl(urlString);
+        if (existingUrl == null) {
             boolean withinWebsite = hasRequiredHostname(url);
-            boolean fetching = withinWebsite && (!hasExtension(url) || hasRequiredExtension(url));
-            Discovered.add(urlString, fetching, withinWebsite);
-            return fetching;
+            boolean shouldFetch = withinWebsite && (!hasExtension(url) || hasRequiredExtension(url));
+            DiscoveredUrl discoveredUrl = new DiscoveredUrl(urlString, shouldFetch, withinWebsite);
+            urlDiscoveryService.addDiscoveredUrl(discoveredUrl);
+            return shouldFetch;
         } else {
-            Discovered.add(urlString, item.isFetching(), item.isWithinWebsite());
+            // Already discovered, no need to revisit
             return false;
         }
     }
@@ -59,7 +72,8 @@ public class CustomCrawler extends WebCrawler {
     @Override
     protected void handlePageStatusCode(WebURL webUrl, int statusCode, String statusDescription) {
         String url = webUrl.getURL();
-        Fetching.add(url, statusCode);
+        FetchResult fetchResult = new FetchResult(url, statusCode);
+        fetchStatusTracker.addFetchResult(fetchResult);
     }
 
     @Override
@@ -69,7 +83,8 @@ public class CustomCrawler extends WebCrawler {
         if (hasRequiredContentType(contentType)) {
             int size = getPageSize(page);
             int numberOfOutlinks = getNumberOfOutlinks(page);
-            Visited.add(url, size, numberOfOutlinks, contentType);
+            VisitedPage visitedPage = new VisitedPage(url, size, numberOfOutlinks, contentType);
+            visitedPageTracker.addVisitedPage(visitedPage);
         }
     }
 

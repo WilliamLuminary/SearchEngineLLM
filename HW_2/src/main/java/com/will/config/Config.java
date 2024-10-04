@@ -22,7 +22,7 @@ public class Config {
     public static final String DATA_BASE_PATH = "data";
 
     // File Paths
-    public static final String CRAWL_STORAGE_FOLDER_PATH = buildFilePath(DATA_BASE_PATH, "crawler4j");
+    public static final String CRAWL_FILE_PATH = buildFilePath(DATA_BASE_PATH, "crawler4j");
     public static final String DISCOVERED_FILE_PATH = buildFilePath(DATA_BASE_PATH, "urls_" + WEBSITE_DOMAIN + ".csv");
     public static final String FETCHING_FILE_PATH = buildFilePath(DATA_BASE_PATH, "fetch_" + WEBSITE_DOMAIN + ".csv");
     public static final String VISITED_FILE_PATH = buildFilePath(DATA_BASE_PATH, "visit_" + WEBSITE_DOMAIN + ".csv");
