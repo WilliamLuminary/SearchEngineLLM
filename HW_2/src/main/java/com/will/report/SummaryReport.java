@@ -66,7 +66,7 @@ public class SummaryReport {
     private void writeHeader(FileWriter fileWriter) throws IOException {
         writeEntry(fileWriter, "Name", Config.STUDENT_NAME);
         writeEntry(fileWriter, "USC ID", Config.USC_ID);
-        writeEntry(fileWriter, "News site crawled", String.format("%s.com", Config.WEBSITE_DOMAIN));
+        writeEntry(fileWriter, "News site crawled", String.format("%s.com", Config.NEWS_SITE));
         writeEntry(fileWriter, "Number of threads", Config.NUMBER_OF_CRAWLERS);
     }
 

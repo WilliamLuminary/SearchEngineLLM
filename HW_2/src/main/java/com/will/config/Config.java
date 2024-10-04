@@ -9,8 +9,8 @@ public class Config {
     public static final String USC_ID = "5487590475";
 
     // Website Info
-    public static final String WEBSITE_DOMAIN = "usatoday";
-    public static final String WEBSITE_HOSTNAME = "www." + WEBSITE_DOMAIN + ".com";
+    public static final String NEWS_SITE = "usatoday";
+    public static final String WEBSITE_HOSTNAME = "www." + NEWS_SITE + ".com";
     public static final String SEED_URL = "https://" + WEBSITE_HOSTNAME;
 
     // CustomCrawler Configuration
@@ -23,10 +23,10 @@ public class Config {
 
     // File Paths
     public static final String CRAWL_FILE_PATH = buildFilePath(DATA_BASE_PATH, "crawler4j");
-    public static final String DISCOVERED_FILE_PATH = buildFilePath(DATA_BASE_PATH, "urls_" + WEBSITE_DOMAIN + ".csv");
-    public static final String FETCHING_FILE_PATH = buildFilePath(DATA_BASE_PATH, "fetch_" + WEBSITE_DOMAIN + ".csv");
-    public static final String VISITED_FILE_PATH = buildFilePath(DATA_BASE_PATH, "visit_" + WEBSITE_DOMAIN + ".csv");
-    public static final String SUMMARY_FILE_PATH = buildFilePath(DATA_BASE_PATH, "CrawlReport_" + WEBSITE_DOMAIN + ".txt");
+    public static final String DISCOVERED_FILE_PATH = buildFilePath(DATA_BASE_PATH, "urls_" + NEWS_SITE + ".csv");
+    public static final String FETCHING_FILE_PATH = buildFilePath(DATA_BASE_PATH, "fetch_" + NEWS_SITE + ".csv");
+    public static final String VISITED_FILE_PATH = buildFilePath(DATA_BASE_PATH, "visit_" + NEWS_SITE + ".csv");
+    public static final String SUMMARY_FILE_PATH = buildFilePath(DATA_BASE_PATH, "CrawlReport_" + NEWS_SITE + ".txt");
 
     // Helper method to build file paths
     private static String buildFilePath(String... parts) {

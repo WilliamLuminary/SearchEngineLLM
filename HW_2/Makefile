@@ -1,14 +1,16 @@
-# Makefile to zip all files under com.will
+# Makefile to zip specific files
 
-ZIP_FILE=output.zip
-SOURCE_DIR=com/will
-DATA_DIR=data
+ZIP_FILE=crawl.zip
+SOURCE_DIR=src/main/java/com/will
+DATA_FILES=$(wildcard data/*.csv)
 
-all: zip
+all:
+	@echo "For this assignment, you don't need to submit all files, just the zip."
+	zip
 
 zip:
-	@echo "Zipping files under $(SOURCE_DIR)..."
-	zip -r $(ZIP_FILE) $(SOURCE_DIR) $(DATA_DIR)
+	@echo "Zipping files under $(SOURCE_DIR) and CSV files $(DATA_FILES)..."
+	zip -r $(ZIP_FILE) $(SOURCE_DIR) $(DATA_FILES)
 
 clean:
 	@echo "Cleaning up zip file..."
