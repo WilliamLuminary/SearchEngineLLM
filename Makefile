@@ -1,27 +1,38 @@
-# Main Makefile for homework assignments (macOS version)
+# List of homework directories and deadlines
+HW_DIRS = ./HW_1 ./HW_2
+HW_DEADLINES = "2024-09-16 00:00:00" "2024-10-06 00:00:00"
 
-HW1_DIR=./HW_1
-HW2_DIR=./HW_2
-DATE_CHECK=$(shell date +%s)  # Get current date in seconds since epoch
-HW1_DEADLINE=$(shell date -j -f "%Y-%m-%d %H:%M:%S" "2024-09-16 00:00:00" +%s)
-HW2_DEADLINE=$(shell date -j -f "%Y-%m-%d %H:%M:%S" "2024-10-06 00:00:00" +%s)
+DATE_CHECK=$(shell date +%s)
 
-all:
-ifeq ($(shell [ $(DATE_CHECK) -lt $(HW1_DEADLINE) ] && echo true || echo false), true)
-	@echo "Current date is before September 16 midnight, running HW1 zip..."
-	$(MAKE) -C $(HW1_DIR) all
-else ifeq ($(shell [ $(DATE_CHECK) -lt $(HW2_DEADLINE) ] && echo true || echo false), true)
-	@echo "Current date is before October 6 midnight, running HW2 zip..."
-	$(MAKE) -C $(HW2_DIR) all
-else
+define deadline_to_epoch
+$(shell date -j -f "%Y-%m-%d %H:%M:%S" $(1) +%s)
+endef
+
+all: check_deadlines
+
+check_deadlines:
+	$(foreach i, $(shell seq 1 $(words $(HW_DIRS))), \
+		HW_DIR=$(word $(i),$(HW_DIRS)); \
+		DEADLINE=$(word $(i),$(HW_DEADLINES)); \
+		EPOCH_DEADLINE=$(call deadline_to_epoch,$(DEADLINE)); \
+		if [ $(DATE_CHECK) -lt $$EPOCH_DEADLINE ]; then \
+			$(MAKE) run_hw DIR=$$HW_DIR; \
+			exit 0; \
+		fi; \
+	)
 	@echo "All homework assignments submitted."
-endif
 
 hw1:
-	@echo "Calling HW1 Makefile..."
-	$(MAKE) -C $(HW1_DIR) all
+	$(MAKE) run_hw DIR=./HW_1
 
 hw2:
-	@echo "Calling HW2 Makefile..."
-	$(MAKE) -C $(HW2_DIR) clean
-	$(MAKE) -C $(HW2_DIR) all
+	$(MAKE) run_hw DIR=./HW_2
+
+# hw3:
+#	$(MAKE) run_hw DIR=./HW_3
+
+run_hw:
+	@echo "Cleaning $(DIR) Makefile..."
+	$(MAKE) -C $(DIR) clean
+	@echo "Running all for $(DIR)..."
+	$(MAKE) -C $(DIR) all

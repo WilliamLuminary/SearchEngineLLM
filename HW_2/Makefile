@@ -2,14 +2,15 @@
 
 ZIP_FILE=crawl.zip
 JAVA_FILES=$(wildcard src/main/java/com/will/**/*.java)
-DATA_FILES=$(wildcard /data/*.csv)
+DATA_FILES=$(wildcard data/*.csv)
+TEXT_FILES=$(wildcard data/*.txt)
 
-all: zip
+all: clean zip
 
 zip:
-	@if [ -n "$(JAVA_FILES)" ]; then \
-		echo "Zipping Java files and CSV files, flattening directory structure, and excluding .DS_Store..."; \
-		zip -j $(ZIP_FILE) $(JAVA_FILES) $(DATA_FILES) -x "*.DS_Store"; \
+	@if [ -n "$(DATA_FILES)" ]; then \
+		echo "Zipping CSV files and TXT files and excluding .DS_Store..."; \
+		zip -j $(ZIP_FILE) $(DATA_FILES) $(TEXT_FILES) -x "*.DS_Store"; \
 		echo "Done! Please submit $(realpath $(ZIP_FILE))"; \
 	else \
 		echo "No files to zip!"; \
@@ -18,6 +19,6 @@ zip:
 
 clean:
 	@echo "Cleaning up zip file..."
-	rm -f $(ZIP_FILE)
+	-@rm -f $(ZIP_FILE)
 
 .PHONY: all zip clean
