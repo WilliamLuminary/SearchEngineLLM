@@ -1,16 +1,20 @@
-# Makefile to zip specific files
+# Makefile to zip specific files for HW2
 
 ZIP_FILE=crawl.zip
-SOURCE_DIR=src/main/java/com/will
-DATA_FILES=$(wildcard data/*.csv)
+JAVA_FILES=$(wildcard src/main/java/com/will/**/*.java)
+DATA_FILES=$(wildcard /data/*.csv)
 
-all:
-	@echo "For this assignment, you don't need to submit all files, just the zip."
-	zip
+all: zip
 
 zip:
-	@echo "Zipping files under $(SOURCE_DIR) and CSV files $(DATA_FILES)..."
-	zip -r $(ZIP_FILE) $(SOURCE_DIR) $(DATA_FILES)
+	@if [ -n "$(JAVA_FILES)" ]; then \
+		echo "Zipping Java files and CSV files, flattening directory structure, and excluding .DS_Store..."; \
+		zip -j $(ZIP_FILE) $(JAVA_FILES) $(DATA_FILES) -x "*.DS_Store"; \
+		echo "Done! Please submit $(realpath $(ZIP_FILE))"; \
+	else \
+		echo "No files to zip!"; \
+		exit 1; \
+	fi
 
 clean:
 	@echo "Cleaning up zip file..."
