@@ -1,6 +1,6 @@
 # List of homework directories and deadlines
-HW_DIRS = ./HW_1 ./HW_2
-HW_DEADLINES = 2024-09-16 2024-10-06
+HW_DIRS = ./HW_1 ./HW_2 ./HW_3
+HW_DEADLINES = 2024-09-16 2024-10-06 2024-10-25
 
 DATE_CHECK=$(shell date +%s)
 
@@ -24,8 +24,8 @@ hw1:
 hw2:
 	$(MAKE) run_hw DIR=./HW_2
 
-# hw3:
-#	$(MAKE) run_hw DIR=./HW_3
+ hw3:
+	$(MAKE) run_hw DIR=./HW_3
 
 run_hw:
 	@echo "Cleaning $(DIR) Makefile..."
