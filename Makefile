@@ -24,7 +24,7 @@ hw1:
 hw2:
 	$(MAKE) run_hw DIR=./HW_2
 
- hw3:
+hw3:
 	$(MAKE) run_hw DIR=./HW_3
 
 run_hw:
