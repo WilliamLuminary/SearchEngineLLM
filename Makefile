@@ -1,6 +1,6 @@
 # List of homework directories and deadlines
-HW_DIRS = ./HW_1 ./HW_2 ./HW_3
-HW_DEADLINES = 2024-09-16 2024-10-06 2024-10-25
+HW_DIRS = ./HW_1 ./HW_2 ./HW_3 ./HW_4
+HW_DEADLINES = 2024-09-16 2024-10-06 2024-10-25 2024-11-26
 
 DATE_CHECK=$(shell date +%s)
 
