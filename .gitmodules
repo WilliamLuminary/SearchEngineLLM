@@ -1,12 +1,12 @@
+[submodule "HW_1"]
+	path = HW_1
+	url = git@github.com:WilliamLuminary/CSCI572_HW1.git
+[submodule "HW_2"]
+	path = HW_2
+	url = git@github.com:WilliamLuminary/CSCI572_HW2.git
 [submodule "HW_3"]
 	path = HW_3
 	url = git@github.com:WilliamLuminary/CSCI572_HW3.git
 [submodule "HW_4"]
 	path = HW_4
 	url = git@github.com:WilliamLuminary/CSCI572_HW4.git
-[submodule "HW_2"]
-	path = HW_2
-	url = git@github.com:WilliamLuminary/CSCI572_HW2.git
-[submodule "HW_1"]
-	path = HW_1
-	url = git@github.com:WilliamLuminary/CSCI572_HW1.git
