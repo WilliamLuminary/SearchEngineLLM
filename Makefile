@@ -18,6 +18,22 @@ check_deadlines:
 	)
 	@echo "All homework assignments submitted."
 
+run_hw:
+	@if [ -d "$(DIR)" ]; then \
+		if [ -f "$(DIR)/Makefile" ]; then \
+			echo "Cleaning $(DIR) Makefile..."; \
+			$(MAKE) -C $(DIR) clean; \
+			echo "Running all for $(DIR)..."; \
+			$(MAKE) -C $(DIR) all; \
+		else \
+			echo "No Makefile found in $(DIR)."; \
+			exit 1; \
+		fi; \
+	else \
+		echo "$(DIR) does not exist."; \
+		exit 1; \
+	fi
+
 hw1:
 	$(MAKE) run_hw DIR=./HW_1
 
@@ -26,9 +42,3 @@ hw2:
 
 hw3:
 	$(MAKE) run_hw DIR=./HW_3
-
-run_hw:
-	@echo "Cleaning $(DIR) Makefile..."
-	$(MAKE) -C $(DIR) clean
-	@echo "Running all for $(DIR)..."
-	$(MAKE) -C $(DIR) all
