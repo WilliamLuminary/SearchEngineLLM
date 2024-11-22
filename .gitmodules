@@ -1,9 +1,9 @@
 [submodule "HW_3"]
 	path = HW_3
-	url = https://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@github.com/WilliamLuminary/CSCI572_HW3.git
+	url = git@github.com:WilliamLuminary/CSCI572_HW3.git
 [submodule "HW_4"]
 	path = HW_4
-	url = ./HW_4
+	url = git@github.com:WilliamLuminary/CSCI572_HW4.git
 [submodule "HW_2"]
 	path = HW_2
-	url = ./HW_2
+	url = git@github.com:WilliamLuminary/CSCI572_HW2.git
