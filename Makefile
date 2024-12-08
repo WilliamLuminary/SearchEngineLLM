@@ -1,6 +1,6 @@
 # List of homework directories and deadlines
-HW_DIRS = ./HW_1 ./HW_2 ./HW_3 ./HW_4
-HW_DEADLINES = 2024-09-16 2024-10-06 2024-10-25 2024-11-26
+HW_DIRS = ./HW_1 ./HW_2 ./HW_3 ./HW_4 ./HW_5
+HW_DEADLINES = 2024-09-16 2024-10-06 2024-10-25 2024-11-26 2024-12-14
 
 DATE_CHECK=$(shell date +%s)
 
@@ -42,3 +42,9 @@ hw2:
 
 hw3:
 	$(MAKE) run_hw DIR=./HW_3
+
+hw4:
+	$(MAKE) run_hw DIR=./HW_4
+
+hw5:
+	$(MAKE) run_hw DIR=./HW_5
