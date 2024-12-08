@@ -10,3 +10,6 @@
 [submodule "HW_4"]
 	path = HW_4
 	url = git@github.com:WilliamLuminary/CSCI572_HW4.git
+[submodule "HW_5"]
+	path = HW_5
+	url = git@github.com:WilliamLuminary/CSCI572_HW5.git
